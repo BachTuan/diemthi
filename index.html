@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <h1>Tự động get kết kết quả thi từ báo Tuổi Trẻ</h1>
+        <div id="ketqua">Chưa có gì</div>
+        <div id="rq"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            var count = 0;
+            setInterval(function () {
+                count++
+                $.post(
+                    "https://diemthi.tuoitre.vn/search-thpt-score",
+                    {
+                        data: "13004461",
+                        code: "",
+                    },
+                    function (data, status) {
+                        if (data.data.length == 0) {
+                            $("#ketqua").html("Vẫn chưa có!!!");
+                        } else {
+                            $("#ketqua").html(data);
+                        }
+                        $("#rq").html("Số lần kiểm tra:" + count.toString());
+                    }
+                );
+            }, 1000);
+        </script>
+    </body>
+</html>
